@@ -59,7 +59,7 @@ function logo()
     end
     if (t>60) then
     spr(15,55,60)
-    print("yip-yip!",46,50,7)
+    print("sky bison!",41,50,7)
     end
     flip() t+=1
   end
