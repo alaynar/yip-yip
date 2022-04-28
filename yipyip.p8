@@ -21,6 +21,8 @@ end
 --this updates functions throughout the game
 function _update()
 
+--☉ ✽➡️░█⌂☉♪● ♥█⧗░ 😐▤★░⬅️✽
+if (isalive == 1) then
 --if there is no textbox then update
 	if(not active_text) then
 		direction = move_appa()
@@ -41,6 +43,7 @@ function _update()
 		if(jumping == 1) then
 		update_jump()
 		end
+end
 	end
 
  
@@ -54,6 +57,7 @@ function _draw()
  draw_switch()
  draw_door()
 // draw_text()
+	drown()
 end
 
 function logo()
@@ -144,7 +148,7 @@ end
 --makes the player on the map
 function makeplayer()
 	p={}
-
+ isalive = 1
 --sets starting position for appa
 	
 	if(play_x == 0 and play_y == 0) then
@@ -167,6 +171,7 @@ function makeplayer()
 	p.spriteul=3
 	p.spriteu=6
 	p.sprited=5
+	p.drown=18
 
 --char sprite jump numbers
 	p.spritedrj=7
@@ -177,6 +182,35 @@ function makeplayer()
 	p.spritedj=11
 	p.spritebsha=13
 	p.spritessha=14
+
+end
+
+--if appa is drowning
+--  change the sprite
+function drown()
+ if ((jumping == 0) and (is_tile(nomove,p.x,p.y))) then
+		  isalive = 0
+		  spr(p.drown,p.x*8,p.y*8)
+		  --sfx(2)
+		  
+		 textx=mapx*8+16
+   texty=mapy*8+56
+   
+   rectfill(textx,texty,textx+94,texty+16,7)
+   print("press ❎ to revive!", textx+12,texty+6,1)
+ 
+		  
+		  --press x for revive
+		  if (btnp(❎)) then
+		  --revive!/reload
+		  --revive sound
+		  sfx(2)
+		  --go to before takeoff
+		  p.x = dget(0)
+    p.y = dget(1)
+    isalive=1
+		end
+		end
 
 end
 
@@ -199,6 +233,7 @@ end
 --jumping appa to screen
 function drawappa(direct) --direction parameter will be added
 
+if(isalive == 1) then
  if(jumping == 0) then
 	  if(direct == 0) then
      spr(p.spritedl,p.x*8,p.y*8)
@@ -238,6 +273,7 @@ spr(p.spritessha,(p.x)*8,(p.y+1)*8)     spr(p.spritedj,p.x*8,p.y*8)
      --spr(p.spritej,(p.x)*8,(p.y+1)*8)
    end
  end
+end
 --jumping appa sprite here
 --spr(p.sprite2,(p.x+2)*8,p.y*8)
 --spr(p.spritej,(p.x+2)*8,(p.y+1)*8)
@@ -308,11 +344,10 @@ function move_appa()
  if (can_fly(tox,toy) and (jumping == 1)) then
   p.x=mid(0,tox,127)
 		p.y=mid(0,toy,63)
+ else
+   dset(0, p.x)
+   dset(1, p.y)
  end
- 
- dset(0, p.x)
- dset(1, p.y)
-  
  return lastdir
 end
 -->8
@@ -591,3 +626,4 @@ __map__
 __sfx__
 000100000905000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00100000000000105003050090500d0500f0500f0500e0500f050120501a0501c05012000280502d0501e00000000000000000000000000000000000000000000000000000000000000000000000000000000000
+001000001907020070270702e0702c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
