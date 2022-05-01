@@ -333,9 +333,11 @@ if(isalive == 1) then
  	   spr(p.spritedrj,p.x*8,p.y*8)
  	   spr(p.spritebsha,(p.x)*8,(p.y+1)*8)
    elseif(direct == 2) then
-spr(p.spritessha,(p.x)*8,(p.y+1)*8)     spr(p.spriteuj,p.x*8,p.y*8)
+     spr(p.spriteuj,p.x*8,p.y*8)
+     spr(p.spritessha,(p.x)*8,(p.y+1)*8)
    elseif(direct == 3) then
-spr(p.spritessha,(p.x)*8,(p.y+1)*8)     spr(p.spritedj,p.x*8,p.y*8)
+     spr(p.spritedj,p.x*8,p.y*8)
+     spr(p.spritessha,(p.x)*8,(p.y+1)*8)
    elseif(direct == 4) then
      spr(p.spriteulj,p.x*8,p.y*8)
      spr(p.spritebsha,(p.x)*8,(p.y+1)*8)
@@ -344,7 +346,7 @@ spr(p.spritessha,(p.x)*8,(p.y+1)*8)     spr(p.spritedj,p.x*8,p.y*8)
      spr(p.spritebsha,(p.x)*8,(p.y+1)*8)
 	  else 
 	    spr(p.spritedj,(p.x)*8,p.y*8)
-     --spr(p.spritej,(p.x)*8,(p.y+1)*8)
+     spr(p.spritessha,(p.x)*8,(p.y+1)*8)
    end
  end
 end
@@ -412,7 +414,7 @@ function move_appa()
  if (is_powerup(tox,toy)) then
  		timerdur = timer + 90
  		swap_tile(tox,toy,16)
- 		sfx(0)
+ 		sfx(3)
  end
 
  if (can_fly(tox,toy) and (jumping == 1)) then
@@ -538,13 +540,13 @@ end
 function check()
 	
  	--check the actual win plz
-	if(zuko == 1 and katara == 1 and aang == 1 and sokka == 1 and momo == 1 and toph == 1) then
-		 
-		 textx=mapx*8+16
-   texty=mapy*8+56
+ if(zuko == 1 and katara == 1 and aang == 1 and sokka == 1 and momo == 1 and toph == 1) then
+
+		 textxwin=mapx*8+16
+   textywin=mapy*8+24
    
-   rectfill(textx,texty,textx+94,texty+16,0)
-   print("you win!",textx+12,texty+6,3)
+   rectfill(textxwin,textywin,textxwin+94,textywin+20,0)
+   print("you win!\nlamp to restart",textxwin+12,textywin+6,3)
 	end
 
 end
@@ -659,56 +661,59 @@ function set_door()
  door.x=20
  door.y=27
  
- if(dsprite==nil or dsprite==19) then
+ if(dsprite==19 or dsprite==0) then
  door.sprite=19
- else
+ else if (dsprite==16) then
  mset(20,27,114)
  door.sprite=dsprite
+ end
  end
  
  doorsnow={}
  doorsnow.x=51
  doorsnow.y=18
  
- if(dspritesnow==nil or dspritesnow==52) then
+ if(dspritesnow==0 or dspritesnow==52) then
  doorsnow.sprite=52
- else
+ else if (dsprite==16) then
  mset(51,18,83)
  doorsnow.sprite=dspritesnow
+ end
  end
  
  doorearth={}
  doorearth.x=93
  doorearth.y=38
  
- if(dspriteearth==nil or dspriteearth==35) then
+ if(dspriteearth==0 or dspriteearth==35) then
  doorearth.sprite=35
- else
+ else if (dsprite==16) then
  mset(93,38,101)
  doorearth.sprite=dspriteearth
  end
- 
+ end
  
  doorpuzzle1={}
  doorpuzzle1.x=25
  doorpuzzle1.y=8
  
- if(dspritepuzzle1==nil or dspritepuzzle1==43) then
+ if(dspritepuzzle1==0 or dspritepuzzle1==43) then
  doorpuzzle1.sprite=43
- else
+ else if (dsprite==16) then
  mset(25,8,98)
  doorpuzzle1.sprite=dspritepuzzle1
  end
- 
+ end
  doorpuzzle2={}
  doorpuzzle2.x=22
  doorpuzzle2.y=7
  
- if(dspritepuzzle2==nil or dspritepuzzle2==35) then
+ if(dspritepuzzle2==0 or dspritepuzzle2==35) then
  doorpuzzle2.sprite=35
- else
+ else if (dsprite==16) then
  mset(22,7,35)
  doorpuzzle2.sprite=dspritepuzzle2
+ end
  end
  
  
@@ -726,11 +731,11 @@ end
 
 --opens the door when switch is pushed
 function open_door()
-	if (switch.sprite==50 and switchfake1.sprite==49 and switchfake2.sprite==49) mset(20,27,114) door.sprite=0 dset(2, 0)
-	if (switchsnow.sprite==54 and switchsnowfake1.sprite==53 and switchsnowfake2.sprite==53) mset(51,18,83) doorsnow.sprite=0 dset(3, 0)
-	if (switchearth.sprite==56 and switchearthfake1.sprite==55 and switchearthfake2.sprite==55) mset(93,38,101) doorearth.sprite=0 dset(4, 0)
+	if (switch.sprite==50 and switchfake1.sprite==49 and switchfake2.sprite==49) mset(20,27,114) door.sprite=0 dset(2, 16)
+	if (switchsnow.sprite==54 and switchsnowfake1.sprite==53 and switchsnowfake2.sprite==53) mset(51,18,83) doorsnow.sprite=0 dset(3,16)
+	if (switchearth.sprite==56 and switchearthfake1.sprite==55 and switchearthfake2.sprite==55) mset(93,38,101) doorearth.sprite=0 dset(4,16)
 	
-	if (switchpuzzle.sprite==54) mset(25,8,98) doorpuzzle1.sprite=0 dset(5, 0)  mset(22,7,98) doorpuzzle2.sprite=0 dset(6, 0)
+	if (switchpuzzle.sprite==54) mset(25,8,98) doorpuzzle1.sprite=0 dset(5, 16)  mset(22,7,98) doorpuzzle2.sprite=0 dset(6, 16)
 end
 
 --makes switch
@@ -1225,3 +1230,4 @@ __sfx__
 000100000905000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00100000000000105003050090500d0500f0500f0500e0500f050120501a0501c05012000280502d0501e00000000000000000000000000000000000000000000000000000000000000000000000000000000000
 001000001907020070270702e0702c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+001000002307025070280702a07000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
