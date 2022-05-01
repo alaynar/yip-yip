@@ -123,14 +123,6 @@ function draw_map()
  map(0,0,0,0,128,64)
 end
 
-function getmapx()
- return mapx
-end
-
-function getmapy()
- return mapy
-end
-
 --checks what kind of flag the tile has
 function is_tile(tile_type,x,y)
  tile=mget(x,y)
@@ -426,9 +418,10 @@ function move_appa()
  if (can_fly(tox,toy) and (jumping == 1)) then
   p.x=mid(0,tox,127)
 		p.y=mid(0,toy,63)
- else
+ else if (can_move(tox,toy)) then
    dset(0, p.x)
    dset(1, p.y)
+ end
  end
  
  if (is_tile(npc, tox,toy)) then
