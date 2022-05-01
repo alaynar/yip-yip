@@ -16,14 +16,19 @@ function _init()
  dspriteearth = dget(4)
  dspritepuzzle1 = dget(5)
  dspritepuzzle2 = dget(6)
+ czuko= dget(7)
+ ckatara= dget(8)
+ caang= dget(9)
+ csokka= dget(10)
+ ctoph= dget(11)
+ cmomo= dget(12)
+ ciroh= dget(13)
+  
 	makeplayer()
 	map_set()
 	switch_button()
 	set_door()
 	text_setup()
-	
-	--zuk0 = 0
-	--katara = 0
 end
 
 --this updates functions throughout the game
@@ -205,14 +210,61 @@ function makeplayer()
 	p.spritebsha=13
 	p.spritessha=14
  
- katara = 0
- zuk0 = 0
- aang = 0
- sokka = 0
- momo = 0
- toph = 0
  
- iroh = 0
+ if(czuko == 1) then
+     zuko = 1			
+ 				swap_tile(12,25,46)
+ 				swap_tile(12,26,-26)
+ else
+     zuk0 = 0
+ end
+ 
+ if(ckatara == 1) then
+    katara = 1
+ 		 swap_tile(52,8,42)
+ 		 swap_tile(52,9,-42)
+ else
+    katara = 0
+ end
+ 
+ if(caang == 1) then
+    aang = 1
+ 		 swap_tile(17,45,35)
+ 		 swap_tile(17,46,-10)
+ else
+    aang = 0
+ end
+ 
+ if(csokka == 1) then
+    sokka = 1
+ 		 swap_tile(81,47,28)
+ 		 swap_tile(81,48,-13)
+ else
+    sokka = 0
+ end
+ 
+ if(cmomo == 1) then
+    momo = 1
+ 		 swap_tile(117,4,76)
+ 		 swap_tile(116,4,4)
+ else
+    momo = 0
+ end
+ 
+ if(ctoph == 1) then
+    toph = 1
+ 		 swap_tile(106,31,48)
+ 		 swap_tile(106,32,-26)
+ else
+    toph = 0
+ end
+ 
+ if(ciroh == 1) then
+    iroh = 1
+ 			swap_tile(92,23,-54)
+ else
+    iroh = 0
+ end
 end
 
 --if appa is drowning
@@ -386,6 +438,8 @@ function move_appa()
  		if(p.x == 12 and p.y == 26) then
  			if(btnp(❎)) then
  				zuko = 1
+ 				
+ 				dset(7,1)
  				 			
  				draw_zuko = 1 				
  				
@@ -402,6 +456,8 @@ function move_appa()
  			katara = 1
  			draw_katara = 1
  		
+ 		 dset(8,1)
+ 		
  		 swap_tile(52,8,42)
  		 swap_tile(52,9,-42)
  		 end
@@ -412,6 +468,8 @@ function move_appa()
  			sfx(2)
  			
  			aang = 1
+ 		
+ 		 dset(9,1)
  		
  		 draw_aang = 1
  		 swap_tile(17,45,35)
@@ -424,6 +482,9 @@ function move_appa()
  			sfx(2)
  			
  			sokka = 1
+ 			
+ 			dset(10,1)
+ 			
  			draw_sokka = 1
  		
  		 swap_tile(81,47,28)
@@ -438,6 +499,8 @@ function move_appa()
  			toph = 1
  			draw_toph = 1
  		
+ 		 dset(11,1)
+ 		 
  		 swap_tile(106,31,48)
  		 swap_tile(106,32,-26)
  		 end
@@ -448,6 +511,9 @@ function move_appa()
  			sfx(2)
  			
  			momo = 1
+ 			
+ 			dset(12,1)
+ 			
  			draw_momo = 1
  		
  		 swap_tile(117,4,76)
@@ -462,6 +528,10 @@ function move_appa()
  			
  			iroh = 1
  			draw_iroh = 1
+ 			
+ 			dset(13,1)
+
+ 			
  			swap_tile(92,23,-54)
  			sfx(2)
  			
@@ -799,6 +869,14 @@ mset(22,7,35)
 doorpuzzle1.sprite=35
 dset(6,35)
 
+dset(7,0)
+dset(8,0)
+dset(9,0)
+dset(10,0)
+dset(11,0)
+dset(12,0)
+dset(13,0)
+
 p.x = 49  
 dset(0,49)
 p.y = 57 
@@ -964,7 +1042,7 @@ fffffffff50999995555554517777771666556663333333b6555577155555555fff54fff33333333
 15151515151515156417171717161616151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515
 15151515151515151515153737373737373737373737373737373737371515151515151535353515153535353535353535353535353535353535151535353515
 15151515151515151717171717171515151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515
-15151515151515151537373737363637373737373704043704043737371515151515151515151515353535353535343535353535353535353535351535353515
+15151515151515151537373737363637373737373704043704043737371515151515151515151515353535353535353535353535353535353535351535353515
 15151515151564171717171715151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515
 15151515151515153737373736363636373737370436040536363737371515151515351535351535353535353535353535353535353535353535351535351535
 15151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515151515
